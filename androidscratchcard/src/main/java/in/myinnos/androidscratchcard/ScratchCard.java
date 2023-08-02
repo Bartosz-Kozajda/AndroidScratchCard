@@ -51,6 +51,11 @@ public class ScratchCard extends View {
     private Paint mInnerPaint;
     private Paint mOuterPaint;
     private OnScratchListener mListener;
+    private Boolean isAnimationInProgress = false;
+
+    public void setAnimationInProgress(Boolean animationInProgress) {
+        isAnimationInProgress = animationInProgress;
+    }
 
     public void setScratchDrawable(Drawable drawable) {
         mDrawable = drawable;
@@ -67,6 +72,8 @@ public class ScratchCard extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+
+        if (isAnimationInProgress) return;
 
         if (mBitmap != null)
             mBitmap.recycle();
